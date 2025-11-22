@@ -14,14 +14,14 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        ImageView heart1 = findViewById(R.id.heart1);
-        ImageView heart2 = findViewById(R.id.heart2);
-        ImageView heart4 = findViewById(R.id.heart4);
+        ImageView heart_breath = findViewById(R.id.heart_breath);
+        ImageView heart_beat = findViewById(R.id.heart_beat);
+        ImageView heart_float = findViewById(R.id.heart_float);
 
         // 分别启动不同的动画
-        MyAnimationUtils.HeartBeatAnimator.start(heart2);
-        MyAnimationUtils.HeartBreathAnimator.start(heart1);
-        MyAnimationUtils.HeartFloatAnimator.start(heart4);
+        MyAnimationUtils.HeartBeatAnimator.start(heart_beat);
+        MyAnimationUtils.HeartBreathAnimator.start(heart_breath);
+        MyAnimationUtils.HeartFloatAnimator.start(heart_float);
 
     }
 

@@ -5,7 +5,7 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.view.View;
 
-import com.jamin.snow.BreatheInterpolator;
+import com.jamin.snow.custom.CustomBreatheInterpolator;
 
 public class MyAnimationUtils {
     private static final String TAG = "AnimationUtils";
@@ -24,8 +24,8 @@ public class MyAnimationUtils {
 
             AnimatorSet animatorSet = new AnimatorSet();
             animatorSet.playTogether(scaleX, scaleY);
-            animatorSet.setDuration(1000);
-            animatorSet.setInterpolator(new BreatheInterpolator());
+            animatorSet.setDuration(1200);
+            animatorSet.setInterpolator(new CustomBreatheInterpolator());
             animatorSet.start();
         }
 
@@ -35,8 +35,8 @@ public class MyAnimationUtils {
     public static class HeartBreathAnimator {
         public static void start(View view) {
             ValueAnimator animator = ValueAnimator.ofFloat(0.5f,1.0f);
-            animator.setDuration(2000);
-            animator.setInterpolator(new BreatheInterpolator());
+            animator.setDuration(1200);
+            animator.setInterpolator(new CustomBreatheInterpolator());
             animator.setRepeatCount(ValueAnimator.INFINITE);
             animator.setRepeatMode(ValueAnimator.RESTART);
             animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -62,8 +62,8 @@ public class MyAnimationUtils {
     public static class HeartFloatAnimator {
         public static void start(View view) {
             ObjectAnimator floatAnimator = ObjectAnimator.ofFloat(view, "translationY", 0f, 50f, 0f);
-            floatAnimator.setDuration(1000);
-            floatAnimator.setInterpolator(new BreatheInterpolator());
+            floatAnimator.setDuration(1200);
+            floatAnimator.setInterpolator(new CustomBreatheInterpolator());
             floatAnimator.setRepeatCount(ValueAnimator.INFINITE);
             floatAnimator.setRepeatMode(ValueAnimator.RESTART);
             floatAnimator.start();

@@ -13,17 +13,17 @@
         android:layout_height="match_parent" />
 
     <ImageView
-        android:id="@+id/heart1"
+        android:id="@+id/heart_breath"
         android:layout_width="315dp"
         android:layout_height="266dp"
-        android:src="@drawable/heart_vector"
+        android:src="@drawable/heart_red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/heart2"
+        android:id="@+id/heart_beat"
         android:layout_width="202dp"
         android:layout_height="171dp"
         android:src="@drawable/heart_vector"
@@ -33,7 +33,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
-        android:id="@+id/heart3"
+        android:id="@+id/heart_white"
         android:layout_width="120dp"
         android:layout_height="102.5dp"
         android:src="@drawable/heart_white"
@@ -43,7 +43,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/heart4"
+        android:id="@+id/heart_float"
         android:layout_width="67dp"
         android:layout_height="57dp"
         android:src="@drawable/heart_vector"
