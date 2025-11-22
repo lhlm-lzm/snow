@@ -4,6 +4,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 
 import com.jamin.snow.custom.CustomBreatheInterpolator;
 
@@ -49,13 +50,6 @@ public class MyAnimationUtils {
             animator.start();
         }
 
-        public static void stop(View view) {
-            // 可以通过tag存储animator引用以便停止
-            Object tag = view.getTag();
-            if (tag instanceof ValueAnimator) {
-                ((ValueAnimator) tag).cancel();
-            }
-        }
     }
 
     // 心跳漂浮动画
@@ -71,5 +65,31 @@ public class MyAnimationUtils {
 
     }
 
+    public static class startRotationAnimation {
+        public static void start(View view) {
+            stop(view);
+            float currentRotation = view.getRotation();
+            ValueAnimator rotationAnimator = ValueAnimator.ofFloat(currentRotation,currentRotation +  360f);
+            rotationAnimator.setDuration(2000);
+            rotationAnimator.setRepeatCount(ValueAnimator.INFINITE);
+            rotationAnimator.setInterpolator(new LinearInterpolator());
+            rotationAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    float value = (Float) animation.getAnimatedValue();
+                    view.setRotation(value);
+                }
+            });
+            rotationAnimator.start();
+            view.setTag(rotationAnimator);
+        }
+
+        public static void stop(View view) {
+            Object tag = view.getTag();
+            if (tag instanceof ValueAnimator) {
+                ((ValueAnimator) tag).cancel();
+            }
+        }
+    }
 
 }

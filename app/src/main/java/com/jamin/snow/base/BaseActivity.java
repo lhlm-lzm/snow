@@ -57,7 +57,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.e(TAG, "onResume:");
+        Log.e(TAG, "onResume");
     }
     @Override
     protected void onPause() {
