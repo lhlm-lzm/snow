@@ -1,5 +1,8 @@
 package com.jamin.snow.utils;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.view.View;
 
 import com.jamin.snow.BreatheInterpolator;
@@ -10,26 +13,20 @@ public class MyAnimationUtils {
     // 心跳动画
     public static class HeartBeatAnimator {
         public static void start(View view) {
-            long startTime = System.currentTimeMillis();
-            final float duration = 500f; // 500ms// 心跳周期
 
-            Runnable runnable = new Runnable() {
-                @Override
-                public void run() {
-                    long now = System.currentTimeMillis();
-                    float t = ((now - startTime) % duration) / duration; // 0~1
-                    float scale = 1f + (1.5f - 1f) * new BreatheInterpolator().getInterpolation(t);
-                    view.setScaleX(scale);
-                    view.setScaleY(scale);
-                    view.postDelayed(this, 16); // 大约60fps刷新
-                }
-            };
+            ObjectAnimator scaleX = ObjectAnimator.ofFloat(view, "scaleX", 1.0f, 1.5f, 1.0f);
+            ObjectAnimator scaleY = ObjectAnimator.ofFloat(view, "scaleY", 1.0f, 1.5f, 1.0f);
+            // 为每个动画设置重复次数
+            scaleX.setRepeatCount(ValueAnimator.INFINITE);
+            scaleY.setRepeatCount(ValueAnimator.INFINITE);
+            scaleX.setRepeatMode(ValueAnimator.RESTART);
+            scaleY.setRepeatMode(ValueAnimator.RESTART);
 
-            view.post(runnable);
-        }
-
-        public static void stop(View view) {
-            view.removeCallbacks(null);
+            AnimatorSet animatorSet = new AnimatorSet();
+            animatorSet.playTogether(scaleX, scaleY);
+            animatorSet.setDuration(1000);
+            animatorSet.setInterpolator(new BreatheInterpolator());
+            animatorSet.start();
         }
 
     }
@@ -37,50 +34,42 @@ public class MyAnimationUtils {
     // 心跳呼吸动画
     public static class HeartBreathAnimator {
         public static void start(View view) {
-            long startTime = System.currentTimeMillis();
-            final float duration = 500f; // 1秒心跳周期
-
-            Runnable runnable = new Runnable() {
+            ValueAnimator animator = ValueAnimator.ofFloat(0.5f,1.0f);
+            animator.setDuration(2000);
+            animator.setInterpolator(new BreatheInterpolator());
+            animator.setRepeatCount(ValueAnimator.INFINITE);
+            animator.setRepeatMode(ValueAnimator.RESTART);
+            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
-                public void run() {
-                    long now = System.currentTimeMillis();
-                    float t = ((now - startTime) % duration) / duration; // 0~1
-                    float scale = 1f + (1.5f - 1f) * new BreatheInterpolator().getInterpolation(t);
-                    view.setScaleX(scale);
-                    view.setScaleY(scale);
-                    view.postDelayed(this, 16); // 大约60fps刷新
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    float alpha = (Float) animation.getAnimatedValue();
+                    view.setAlpha(alpha);
                 }
-            };
-            view.post(runnable);
+            });
+            animator.start();
         }
 
         public static void stop(View view) {
-            view.removeCallbacks(null);
+            // 可以通过tag存储animator引用以便停止
+            Object tag = view.getTag();
+            if (tag instanceof ValueAnimator) {
+                ((ValueAnimator) tag).cancel();
+            }
         }
     }
 
     // 心跳漂浮动画
     public static class HeartFloatAnimator {
         public static void start(View view) {
-            long startTime = System.currentTimeMillis();
-            final float duration = 500f; // 0.5秒漂浮周期
-
-            Runnable runnable = new Runnable() {
-                @Override
-                public void run() {
-                    long now = System.currentTimeMillis();
-                    float t = ((now - startTime) % duration) / duration;
-                    float translationY = 50f * new BreatheInterpolator().getInterpolation(t);
-                    view.setTranslationY(translationY);
-                    view.postDelayed(this, 16);
-                }
-            };
-            view.post(runnable);
+            ObjectAnimator floatAnimator = ObjectAnimator.ofFloat(view, "translationY", 0f, 50f, 0f);
+            floatAnimator.setDuration(1000);
+            floatAnimator.setInterpolator(new BreatheInterpolator());
+            floatAnimator.setRepeatCount(ValueAnimator.INFINITE);
+            floatAnimator.setRepeatMode(ValueAnimator.RESTART);
+            floatAnimator.start();
         }
 
-        public static void stop(View view) {
-            view.removeCallbacks(null);
-        }
     }
+
 
 }
