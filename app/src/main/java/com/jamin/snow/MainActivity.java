@@ -1,22 +1,28 @@
 package com.jamin.snow;
 
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import android.widget.ImageView;
 
-public class MainActivity extends AppCompatActivity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+import com.jamin.snow.base.BaseActivity;
+import com.jamin.snow.utils.MyAnimationUtils;
 
+public class MainActivity extends BaseActivity {
+    private static final String TAG = "MainActivity";
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void initView() {
         ImageView heart1 = findViewById(R.id.heart1);
         ImageView heart2 = findViewById(R.id.heart2);
         ImageView heart4 = findViewById(R.id.heart4);
 
         // 分别启动不同的动画
-        HeartBeatAnimator.start(heart2);
-        HeartBreathAnimator.start(heart1);
-        HeartFloatAnimator.start(heart4);
+        MyAnimationUtils.HeartBeatAnimator.start(heart2);
+        MyAnimationUtils.HeartBreathAnimator.start(heart1);
+        MyAnimationUtils.HeartFloatAnimator.start(heart4);
+
     }
+
 }
