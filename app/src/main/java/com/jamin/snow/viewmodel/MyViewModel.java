@@ -1,18 +1,23 @@
 package com.jamin.snow.viewmodel;
 
-import android.widget.ImageView;
+import androidx.lifecycle.MutableLiveData;
 
 import com.jamin.snow.base.BaseViewModel;
 
 public class MyViewModel extends BaseViewModel {
-    private boolean isBackgroundMusicPlaying = true;
+    private MutableLiveData<Boolean> isBackgroundMusicPlaying;
 
-    public boolean getBackgroundMusicPlaying() {
+
+    public MutableLiveData<Boolean> getBackgroundMusicPlaying() {
+        if (isBackgroundMusicPlaying == null) {
+            isBackgroundMusicPlaying = new MutableLiveData<>();
+            isBackgroundMusicPlaying.setValue(true);
+        }
         return isBackgroundMusicPlaying;
     }
 
     public void setBackgroundMusicPlaying(boolean playing) {
-        this.isBackgroundMusicPlaying = playing;
+        isBackgroundMusicPlaying.setValue(playing);
     }
 
 }

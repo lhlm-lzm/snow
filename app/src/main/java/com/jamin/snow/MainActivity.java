@@ -3,6 +3,7 @@ package com.jamin.snow;
 import android.util.Log;
 import android.widget.ImageView;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.jamin.snow.base.BaseActivity;
@@ -30,22 +31,22 @@ public class MainActivity extends BaseActivity {
         heart_beat = findViewById(R.id.heart_beat);
         heart_float = findViewById(R.id.heart_float);
         background_music = findViewById(R.id.background_music);
-        background_music.setSelected(true);
-        MyAnimationUtils.startRotationAnimation.start(background_music);
-        background_music.setOnClickListener(v -> {
-            if (background_music.isSelected()) {
-                BackgroundMusicPlayer.pause();
-                background_music.setSelected(false);
-                MyAnimationUtils.startRotationAnimation.stop(background_music);
-                myViewModel.setBackgroundMusicPlaying(false);
-                Log.e(TAG, "background music pause");
-            } else {
-                BackgroundMusicPlayer.resume();
-                background_music.setSelected(true);
-                MyAnimationUtils.startRotationAnimation.start(background_music);
-                myViewModel.setBackgroundMusicPlaying(true);
-                Log.e(TAG, "background music resume");
+        myViewModel.getBackgroundMusicPlaying().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean playing) {
+                if (playing) {
+                    MyAnimationUtils.startRotationAnimation.start(background_music); // 启动旋转动画
+                    BackgroundMusicPlayer.resume();
+                    Log.e(TAG, "background music resume");
+                } else {
+                    MyAnimationUtils.startRotationAnimation.stop(background_music); // 停止旋转动画
+                    BackgroundMusicPlayer.pause();
+                    Log.e(TAG, "background music pause");
+                }
             }
+        });
+        background_music.setOnClickListener(v -> {
+            myViewModel.setBackgroundMusicPlaying(!myViewModel.getBackgroundMusicPlaying().getValue());
         });
 
         // 分别启动不同的动画
@@ -57,22 +58,19 @@ public class MainActivity extends BaseActivity {
         BackgroundMusicPlayer.playBackgroundMusic(this, R.raw.background_music);
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        // 暂停背景音乐
-        BackgroundMusicPlayer.pause();
-        MyAnimationUtils.startRotationAnimation.stop(background_music);
-    }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (myViewModel.getBackgroundMusicPlaying()) {
-            // 恢复背景音乐
+        if (myViewModel.getBackgroundMusicPlaying().getValue()) {
             BackgroundMusicPlayer.resume();
-            MyAnimationUtils.startRotationAnimation.start(background_music);
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        BackgroundMusicPlayer.pause();
     }
 
     @Override
@@ -83,12 +81,5 @@ public class MainActivity extends BaseActivity {
         MyAnimationUtils.startRotationAnimation.stop(background_music);
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        // 停止背景音乐
-        BackgroundMusicPlayer.pause();
-        MyAnimationUtils.startRotationAnimation.stop(background_music);
-    }
 
 }
