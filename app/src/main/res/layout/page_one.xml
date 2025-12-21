@@ -1,0 +1,57 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingStart="12dp"
+    android:paddingEnd="12dp"
+    android:paddingTop="50dp"
+    android:paddingBottom="16dp"
+    android:gravity="top"
+    android:background="@drawable/story_background">
+
+    <!-- 主图片 -->
+    <ImageView
+        android:id="@+id/imgTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+
+        android:src="@drawable/q_001" />
+
+    <!-- 第二张图片（可选，贴近主图） -->
+    <ImageView
+        android:id="@+id/imgBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+
+
+        android:visibility="gone" />
+
+    <!-- 标题，紧跟图片 -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <!-- 正文 -->
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:lineSpacingExtra="4dp" />
+
+</LinearLayout>

@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public abstract class BaseActivity extends AppCompatActivity {
-    private final String TAG = getClass().getSimpleName();
+    private final String TAG = getClass().getSimpleName(); // 获取实例类名
     private View rootView;
 
 
@@ -72,6 +72,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d(TAG, "onDestroy");
+        Log.e(TAG, "onDestroy");
     }
 }

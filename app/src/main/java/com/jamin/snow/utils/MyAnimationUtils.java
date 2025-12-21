@@ -92,4 +92,42 @@ public class MyAnimationUtils {
         }
     }
 
+    // 下滑箭头位移和透明度变化动效
+    public static void startScrollHintAnimation(View view) {
+
+        // 位移动画：向下 → 回到原位
+        ObjectAnimator translationY = ObjectAnimator.ofFloat(
+                view,
+                "translationY",
+                0f,
+                30f,
+                0f
+        );
+        translationY.setDuration(1200);
+        translationY.setRepeatCount(ValueAnimator.INFINITE);
+        translationY.setRepeatMode(ValueAnimator.RESTART);
+        translationY.setInterpolator(new CustomBreatheInterpolator());
+
+        // 透明度动画：淡出 → 淡入
+        ObjectAnimator alphaAnimator = ObjectAnimator.ofFloat(
+                view,
+                "alpha",
+                0.8f,
+                0.3f,
+                0.8f
+        );
+        alphaAnimator.setDuration(1200);
+        alphaAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        alphaAnimator.setRepeatMode(ValueAnimator.RESTART);
+        alphaAnimator.setInterpolator(new CustomBreatheInterpolator());
+
+        // 同时播放
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(translationY, alphaAnimator);
+        animatorSet.start();
+
+        // 绑定到 View，方便后续停止
+        view.setTag(animatorSet);
+    }
+
 }

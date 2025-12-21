@@ -1,5 +1,6 @@
 package com.jamin.snow;
 
+import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -7,7 +8,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.jamin.snow.base.BaseActivity;
+import com.jamin.snow.base.BaseApplication;
 import com.jamin.snow.utils.BackgroundMusicPlayer;
+import com.jamin.snow.utils.DialogUtils;
 import com.jamin.snow.utils.MyAnimationUtils;
 import com.jamin.snow.viewmodel.MyViewModel;
 
@@ -17,7 +20,10 @@ public class MainActivity extends BaseActivity {
     private ImageView heart_breath;
     private ImageView heart_beat;
     private ImageView heart_float;
+    private ImageView heart_white;
     private MyViewModel myViewModel;
+
+    private int fastClickCount = 0;
 
     @Override
     protected int getLayoutId() {
@@ -31,6 +37,18 @@ public class MainActivity extends BaseActivity {
         heart_beat = findViewById(R.id.heart_beat);
         heart_float = findViewById(R.id.heart_float);
         background_music = findViewById(R.id.background_music);
+        heart_white = findViewById(R.id.heart_white);
+        heart_white.setOnClickListener(v -> {
+            if (DialogUtils.isFastClick()) {
+                fastClickCount++;
+                if (fastClickCount >= 4) {
+                    DialogUtils.showDialog(this);
+                    fastClickCount = 0;
+                }
+            } else {
+                fastClickCount = 0;
+            }
+        });
         myViewModel.getBackgroundMusicPlaying().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean playing) {
@@ -55,7 +73,7 @@ public class MainActivity extends BaseActivity {
         MyAnimationUtils.HeartFloatAnimator.start(heart_float);
 
         // 启动背景音乐
-        BackgroundMusicPlayer.playBackgroundMusic(this, R.raw.background_music);
+        BackgroundMusicPlayer.playBackgroundMusic(getApplicationContext(), R.raw.background_music);
     }
 
 
@@ -65,6 +83,13 @@ public class MainActivity extends BaseActivity {
         if (myViewModel.getBackgroundMusicPlaying().getValue()) {
             BackgroundMusicPlayer.resume();
         }
+        new Handler().postDelayed(() -> {
+            Log.e(TAG, "2s runnable");
+            if (myViewModel.getBackgroundMusicPlaying().getValue()) {
+                Log.e(TAG, "resume playBackgroundMusic");
+                BackgroundMusicPlayer.playBackgroundMusic(getApplicationContext(), R.raw.background_music);
+            }
+        }, 2000); // 延迟2秒执行
     }
 
     @Override

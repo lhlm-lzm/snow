@@ -1,17 +1,20 @@
 package com.jamin.snow.base;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 public class BaseApplication extends Application {
     private static BaseApplication instance;
     private static final String TAG = "BaseApplication";
+    private static Context context;
 
     @Override
     public void onCreate() {
         super.onCreate();
         Log.d(TAG, "onCreate: ");
         instance = this;
+        context = getApplicationContext();
         // 初始化操作
         initialize();
     }
@@ -23,6 +26,10 @@ public class BaseApplication extends Application {
 
     public static BaseApplication getInstance() {
         return instance;
+    }
+
+    public Context getContext() {
+        return context;
     }
 }
 

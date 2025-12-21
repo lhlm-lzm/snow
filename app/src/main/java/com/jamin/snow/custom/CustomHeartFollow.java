@@ -1,4 +1,4 @@
-package com.jamin.snow;
+package com.jamin.snow.custom;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -7,16 +7,17 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuffColorFilter;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.jamin.snow.R;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-public class MyView extends View {
+public class CustomHeartFollow extends View {
 
     private Random random = new Random();
     private List<Love> loves = new ArrayList<>();
@@ -25,17 +26,17 @@ public class MyView extends View {
     // 在类成员变量中添加
     private List<Love> temporaryLoves = new ArrayList<>();
 
-    public MyView(Context context) {
+    public CustomHeartFollow(Context context) {
         super(context);
         init(context);
     }
 
-    public MyView(Context context, AttributeSet attrs) {
+    public CustomHeartFollow(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public MyView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CustomHeartFollow(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
