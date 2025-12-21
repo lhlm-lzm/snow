@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -14,6 +15,8 @@ import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 public class ImagePreviewActivity extends AppCompatActivity {
+
+    public static final String TAG = "ImagePreviewActivity";
 
     public static final String EXTRA_IMAGE_RES = "image_res";
 
@@ -77,4 +80,14 @@ public class ImagePreviewActivity extends AppCompatActivity {
                 savedImageURL != null ? "图片已保存" : "保存失败",
                 Toast.LENGTH_SHORT).show();
     }
+
+    // 确保在 ImagePreviewActivity 中也正确处理了退场动画
+    @Override
+    public void finish() {
+        super.finish();
+        Log.e(TAG, "finish");
+        // 如果需要自定义退场动画，可以在这里添加
+//        overridePendingTransition(R.anim.scale_center_enter, R.anim.scale_center_exit);
+    }
+
 }

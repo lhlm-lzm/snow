@@ -98,8 +98,8 @@ public class StoryPagerAdapter
 
         if (context instanceof Activity) {
             ((Activity) context).overridePendingTransition(
-                    android.R.anim.fade_in,
-                    android.R.anim.fade_out
+                    R.anim.scale_center_enter,  // 需要创建此资源文件
+                    R.anim.scale_center_exit
             );
         }
     }

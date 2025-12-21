@@ -1,9 +1,35 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Snow" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.Snow" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.Snow" parent="Base.Theme.Snow" />
+    <style name="Theme.Snow.NoAnimation" parent="Theme.Snow">
+        <item name="android:windowAnimationStyle">@style/NoAnimation</item>
+    </style>
+
+    <!-- 空动画样式 -->
+    <style name="NoAnimation">
+        <item name="android:activityOpenEnterAnimation">@null</item>
+        <item name="android:activityOpenExitAnimation">@null</item>
+        <item name="android:activityCloseEnterAnimation">@null</item>
+        <item name="android:activityCloseExitAnimation">@null</item>
+        <item name="android:taskOpenEnterAnimation">@null</item>
+        <item name="android:taskOpenExitAnimation">@null</item>
+        <item name="android:taskCloseEnterAnimation">@null</item>
+        <item name="android:taskCloseExitAnimation">@null</item>
+    </style>
+
+
+    <!-- 中间拉起/消失动画样式 -->
+    <style name="CenterScaleAnimation">
+        <item name="android:windowEnterAnimation">@anim/scale_center_enter</item>
+        <item name="android:windowExitAnimation">@anim/scale_center_exit</item>
+    </style>
+
+    <!-- 带中间动画的主题 -->
+    <style name="Theme.Snow.CenterAnimation" parent="Theme.Snow">
+        <item name="android:windowAnimationStyle">@style/CenterScaleAnimation</item>
+    </style>
 </resources>
