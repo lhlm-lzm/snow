@@ -49,7 +49,7 @@ public class StoryPagerAdapter
         StoryActivity.StoryPage page = pages.get(position);
 
         // 第一张图片：有就显示，没有就隐藏
-        if (page.imgTopRes != null) {
+        if (page.imgTopRes != -1) {
             holder.imgTop.setVisibility(View.VISIBLE);
             holder.imgTop.setImageResource(page.imgTopRes);
         } else {
@@ -57,7 +57,7 @@ public class StoryPagerAdapter
         }
 
         // 第二张图片：有就显示，没有就隐藏
-        if (page.imgBottomRes != null) {
+        if (page.imgBottomRes != -1) {
             holder.imgBottom.setVisibility(View.VISIBLE);
             holder.imgBottom.setImageResource(page.imgBottomRes);
         } else {

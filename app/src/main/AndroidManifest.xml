@@ -8,9 +8,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/snow_001"
+        android:icon="@mipmap/snow"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/snow_001"
+        android:roundIcon="@mipmap/snow"
         android:supportsRtl="true"
         android:theme="@style/Theme.Snow">
         <activity

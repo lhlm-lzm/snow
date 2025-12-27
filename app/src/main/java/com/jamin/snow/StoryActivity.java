@@ -13,6 +13,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.jamin.snow.custom.StoryPagerAdapter;
 import com.jamin.snow.utils.BackgroundMusicPlayer;
+import com.jamin.snow.utils.Constants;
 import com.jamin.snow.utils.MyAnimationUtils;
 import com.jamin.snow.viewmodel.MyViewModel;
 
@@ -62,26 +63,14 @@ public class StoryActivity extends AppCompatActivity {
         BackgroundMusicPlayer.playBackgroundMusic(getApplicationContext(), R.raw.background_music_02);
         List<StoryPage> pages = new ArrayList<>();
 
-        pages.add(new StoryPage(
-                R.drawable.q_001,
-                null,
-                getString(R.string.story_title_1),
-                getString(R.string.story_content_1)
-        ));
-
-        pages.add(new StoryPage(
-                R.drawable.q_002,
-                null,
-                null,
-                getString(R.string.story_content_2)
-        ));
-
-        pages.add(new StoryPage(
-                R.drawable.q_003,
-                R.drawable.q_004,
-                null,
-                getString(R.string.story_content_3)
-        ));
+        for (int i = 0; i < Constants.IMG_TOP_LIST.length ; i++) {
+            pages.add(new StoryPage(
+                    Constants.IMG_TOP_LIST[i],
+                    Constants.IMG_BTM_LIST[i],
+                    Constants.TEXT_TITLE_LIST[i] != -1 ? getString(Constants.TEXT_TITLE_LIST[i]) : null,
+                    Constants.TEXT_CONTENT_LIST[i] != -1 ? getString(Constants.TEXT_CONTENT_LIST[i]) : null
+            ));
+        }
 
         StoryPagerAdapter adapter = new StoryPagerAdapter(pages);
         viewPager.setAdapter(adapter);
