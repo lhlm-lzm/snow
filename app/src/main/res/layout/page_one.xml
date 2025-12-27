@@ -46,7 +46,7 @@
         android:textStyle="bold" />
 
     <!-- 正文 -->
-    <ScrollView
+    <com.jamin.snow.custom.CustomScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -61,6 +61,6 @@
             android:textColor="@color/black"
             android:lineSpacingExtra="4dp" />
 
-    </ScrollView>
+    </com.jamin.snow.custom.CustomScrollView>
 
 </LinearLayout>
