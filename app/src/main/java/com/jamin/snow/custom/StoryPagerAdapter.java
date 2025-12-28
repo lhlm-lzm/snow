@@ -80,14 +80,20 @@ public class StoryPagerAdapter
             holder.tvTitle.setVisibility(View.GONE);
         }
 
-        SpannableString titleSpan = new SpannableString(page.content);
-        titleSpan.setSpan(
-                new LeadingMarginSpan.Standard(dpToPx(holder.itemView.getContext(), 20), 0),
-                0,
-                page.content.length(),
-                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        );
-        holder.tvContent.setText(titleSpan);
+        // 内容：有就显示，没有就隐藏
+        if (page.content != null && !page.content.isEmpty()) {
+            holder.tvContent.setVisibility(View.VISIBLE);
+            SpannableString titleSpan = new SpannableString(page.content);
+            titleSpan.setSpan(
+                    new LeadingMarginSpan.Standard(dpToPx(holder.itemView.getContext(), 20), 0),
+                    0,
+                    page.content.length(),
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            );
+            holder.tvContent.setText(titleSpan);
+        } else {
+            holder.tvContent.setVisibility(View.GONE);
+        }
 
     }
 

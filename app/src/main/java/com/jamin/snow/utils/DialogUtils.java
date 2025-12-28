@@ -52,8 +52,7 @@ public class DialogUtils {
             if (!TextUtils.isEmpty(inputName)) {
                 // 处理输入的姓名（可根据实际需求修改）
                 Log.e(TAG, "输入的姓名: " + inputName);
-                // TODO: 在此处添加处理输入姓名的逻辑
-                if(inputName.equals("xxx")) {
+                if(inputName.equals(context.getString(R.string.user_name))) {
                     // 打开另一个 Activity
                     Log.e(TAG, "打开第二个Activity");
                     Intent intent = new Intent(context, StoryActivity.class);
